@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { AirVent } from "lucide-react";
 
 export default function SignUp() {
@@ -98,6 +98,34 @@ export default function SignUp() {
     }
   };
 
+  const handleAnonymusSignUp = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const { error } = await authClient.signIn.anonymous({
+        fetchOptions: {
+          onSuccess: () => {
+            setLoading(false)
+            redirect('/dashboad')
+          },
+          onError: (ctx) => setError(ctx.error.message),
+          onRequest: () => {
+            setLoading(true)
+          },
+          onResponse: () => setLoading(true)
+        },
+      });
+
+      if (error) setError(error.message || "Sign up failed");
+      else redirect('/dashboard')
+    } catch {
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8">
       <div className="w-full max-w-xl space-y-8 p-8 rounded-lg shadow-md border border-[#424242] bg-[#2A2A2A]">
@@ -150,6 +178,18 @@ export default function SignUp() {
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
             </svg>
             Google
+          </button>
+
+          <button
+            onClick={handleAnonymusSignUp}
+            disabled={loading}
+            className="flex-1 flex items-center text-[#A0A0A0] justify-center gap-2 px-4 py-2 border border-white/10 rounded-md bg-white/5 hover:bg-white/10 transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            Anonymous
           </button>
         </div>
 
