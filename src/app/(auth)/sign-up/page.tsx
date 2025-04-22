@@ -102,12 +102,11 @@ export default function SignUp() {
     setLoading(true);
     setError("");
 
-    try {
       const { error } = await authClient.signIn.anonymous({
         fetchOptions: {
           onSuccess: () => {
             setLoading(false)
-            redirect('/dashboad')
+            redirect('/dashboard')
           },
           onError: (ctx) => setError(ctx.error.message),
           onRequest: () => {
@@ -116,14 +115,11 @@ export default function SignUp() {
           onResponse: () => setLoading(true)
         },
       });
-
+      console.log(error)
       if (error) setError(error.message || "Sign up failed");
       else redirect('/dashboard')
-    } catch {
       setError("An unexpected error occurred");
-    } finally {
       setLoading(false);
-    }
   };
   
   return (
