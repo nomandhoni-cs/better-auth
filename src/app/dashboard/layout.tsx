@@ -13,6 +13,7 @@ export default async function DashboardLayout({
     const session = await auth.api.getSession({
       headers: headersList,
     });
+    console.log('session :', session);
     if (!session) {
       redirect("/sign-in");
     }
