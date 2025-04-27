@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { MobileSidebar } from "./MobileSidebar";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,13 +20,15 @@ export const TopBar = ({
 }: {
   onToggleSidebar: () => void;
 }) => {
+  const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const handleSignOut = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          window.location.href = "/sign-in";
+          router.push("/sign-in");
         },
       },
     });
@@ -33,11 +38,16 @@ export const TopBar = ({
     <header className="bg-[#2a2a2a]  h-16 px-6 flex items-center justify-between border-b border-[#424242] sticky top-0 w-full z-10 shadow-sm">
       <div className="flex items-center flex-1 max-w-xl gap-4">
         <MobileSidebar
-          isOpen={false}
-          onClose={function (): void {
-            throw new Error("Function not implemented.");
-          }}
+          isOpen={isMobileSidebarOpen}
+          onClose={() => setIsMobileSidebarOpen(false)}
         />
+        <button
+          className="p-1 block lg:hidden text-[#7a7a7a]"
+          onClick={() => setIsMobileSidebarOpen(true)}
+          aria-label="Open Mobile Menu"
+        >
+          ☰
+        </button>
         <button
           className="p-1 hidden lg:block text-[#7a7a7a]"
           onClick={onToggleSidebar}
@@ -62,8 +72,8 @@ export const TopBar = ({
               <div className="w-8 h-8 rounded-full bg-[#424242] animate-pulse" />
             ) : (
               <Image
-                src={session?.user?.image || `https://github.com/shadcn.png`}
-                alt="Profile"
+                src={session?.user?.image || "/placeholder.png"}
+                alt={session?.user?.name || "Username"}
                 width={32}
                 height={32}
                 className="w-8 h-8 rounded-full"
@@ -79,7 +89,7 @@ export const TopBar = ({
           >
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-[#424242]" />
-            <DropdownMenuItem className="hover:bg-[#424242]">
+            <DropdownMenuItem className="hover:bg-[#424242]" onClick={() => router.push("/dashboard/profile")}>
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:bg-[#424242]">
