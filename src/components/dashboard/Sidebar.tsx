@@ -1,22 +1,32 @@
 import React from "react";
-import MenuItem from "@/components/MenuItem";
+import MenuItem from "@/components/dashboard/MenuItem";
 import { navigationData } from "@/data/navigation";
-import { Banana } from "lucide-react";
 import { NavigationSection } from "@/types/navigation";
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
 export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
     <aside
-      className={`bg-[#2a2a2a] border-r border-[#424242] h-screen transition-all duration-300 fixed left-0 top-0 z-0 ${
+      className={`bg-sidebar-primary h-screen border-r transition-all duration-300 fixed left-0 top-0 z-0 ${
         isCollapsed ? "w-16" : "w-64"
       }`}
     >
-      <div className="p-4 py-2 border-b border-[#424242]">
-        <div className="flex items-center h-12">
-          <Banana name="shopping-bag" className="w-6 h-6 text-[#7A7A7A]" />
+      <div className="p-4 py-4 border-b h-16">
+        <div className="flex items-center">
+          <Image
+            src={isDark ? "/images/LogoDark.png" : "/images/LogoLight.png"}
+            alt="Logo"
+            className="w-9 h-9 mr-2"
+            width={36}
+            height={36}
+          />
           {!isCollapsed && (
-            <span className="text-2xl font-bold text-[#7A7A7A] ml-3">
-              Nextjs<span className="font-extralight">BetterAuth</span>
+            <span className="text-3xl text-[#7A7A7A] font-extralight ml-3">
+              Orchestra<span className="font-extralight"> 9</span>
             </span>
           )}
         </div>

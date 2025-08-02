@@ -1,4 +1,3 @@
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,18 +22,12 @@ import {
 import React from "react";
 
 export default function DashboardPage() {
-  const breadcrumbItems = [{ label: "Dashboard", href: "/dashboard" }];
-
   return (
     <div className="container mx-auto px-6 md:px-0 pb-8 ">
-      <div className="mb-2">
-        <Breadcrumbs items={breadcrumbItems} />
-      </div>
-
       <main className="flex-1 p-0 md:p-6 pt-0">
         <Tabs defaultValue="overview">
           <div className="flex items-center justify-between">
-            <TabsList className="bg-[#2A2A2A] border border-[#424242]">
+            <TabsList className="">
               <TabsTrigger value="overview" className="text-[#7A7A7A]">
                 Overview
               </TabsTrigger>
@@ -58,7 +51,7 @@ export default function DashboardPage() {
           </div>
           <TabsContent value="overview" className="space-y-4 pt-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-[#A0A0A0]">
                     Total Revenue
@@ -74,7 +67,7 @@ export default function DashboardPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-[#A0A0A0]">
                     Subscriptions
@@ -88,7 +81,7 @@ export default function DashboardPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-[#A0A0A0]">
                     Sales
@@ -104,7 +97,7 @@ export default function DashboardPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-[#A0A0A0]">
                     Active Now
@@ -120,7 +113,7 @@ export default function DashboardPage() {
               </Card>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="bg-[#2A2A2A] lg:col-span-4 border border-[#424242]">
+              <Card className="lg:col-span-4 shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Recent Sales
@@ -137,7 +130,7 @@ export default function DashboardPage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-[#2A2A2A] lg:col-span-3 border border-[#424242]">
+              <Card className="lg:col-span-3 shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Recent Orders
@@ -164,7 +157,7 @@ export default function DashboardPage() {
               </Card>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="bg-[#2A2A2A] lg:col-span-4 border border-[#424242]">
+              <Card className="lg:col-span-4 shadow-none">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0">
                   <div>
                     <CardTitle className="font-medium text-[#A0A0A0]">
@@ -196,7 +189,7 @@ export default function DashboardPage() {
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-[#2A2A2A] lg:col-span-3 border border-[#424242]">
+              <Card className="lg:col-span-3 shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Recent Notifications
@@ -261,7 +254,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Quick Actions
@@ -291,7 +284,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Upcoming Tasks
@@ -348,7 +341,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-[#2A2A2A] border border-[#424242]">
+              <Card className="shadow-none">
                 <CardHeader>
                   <CardTitle className="font-medium text-[#A0A0A0]">
                     Team Activity
@@ -404,7 +397,7 @@ export default function DashboardPage() {
             </div>
           </TabsContent>
           <TabsContent value="analytics" className="space-y-4 pt-4">
-            <Card className="bg-[#2A2A2A] border border-[#424242]">
+            <Card className="shadow-none">
               <CardHeader>
                 <CardTitle>Analytics</CardTitle>
                 <CardDescription>
@@ -419,7 +412,7 @@ export default function DashboardPage() {
             </Card>
           </TabsContent>
           <TabsContent value="reports" className="space-y-4 pt-4">
-            <Card className="bg-[#2A2A2A] border border-[#424242]">
+            <Card className="">
               <CardHeader>
                 <CardTitle>Reports</CardTitle>
                 <CardDescription>

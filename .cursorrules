@@ -69,6 +69,20 @@ export default function Page({ searchParams }: PageProps) {
 - Always add null checks for optional props in React components and provide fallback UI to prevent runtime errors
 - The project is already running on port 3000 - don't try to start it again
 
+## Canvas Theme Awareness
+
+- Canvas components need to explicitly use `useTheme` hook from 'next-themes' to be theme-aware
+- Container backgrounds should use conditional classes based on `resolvedTheme`
+- Canvas drawing contexts need theme-aware colors for grid, boundaries, and component defaults
+- Component default colors (text, backgrounds, borders) should adapt to dark/light themes
+- Always update function dependencies when using theme values in useCallback/useMemo
+- UI panels and components should replace hardcoded text colors (text-gray-600, text-gray-500) with theme-aware alternatives
+- Background colors (bg-gray-100, bg-gray-50) should use darker alternatives in dark mode (bg-gray-800)
+- Use template literals with conditional classes: `className={\`base-classes ${resolvedTheme === "dark" ? "dark-classes" : "light-classes"}\`}`
+- Use these color schemes:
+  - Dark mode: background #171717, borders #292929, text #ffffff, placeholders #d1d5db, UI text text-gray-400, UI backgrounds #171717
+  - Light mode: background #ffffff, borders #e5e7eb, text #000000, placeholders #9ca3af, UI text text-gray-500/text-gray-600, UI backgrounds bg-gray-50/bg-gray-100
+
 # Project Structure
 
 ## Types
@@ -91,7 +105,87 @@ Contains all TypeScript interfaces for the handbook feature:
 
 # Scratchpad
 
-## Current Task: Refactor Real-time Subscription Logic into Custom Hook
+## Completed Task: Fix Canvas Dark Mode Theme Support
+
+[X] Analyzed canvas area component structure and theme handling
+[X] Added useTheme hook import and usage in canvas-area.tsx
+[X] Updated container background to be theme-aware (bg-gray-900 for dark, bg-gray-100 for light)
+[X] Added automatic canvas background color update effect based on theme
+[X] Updated grid color to be theme-aware
+[X] Updated canvas boundary color to be theme-aware
+[X] Made text component default color theme-aware
+[X] Made input component background, border, and placeholder colors theme-aware
+[X] Made image component background, border, and loading text colors theme-aware
+[X] Updated component creation in handleDrop to use theme-aware default colors
+[X] Updated function dependencies to include resolvedTheme
+[X] Tested for linting errors - all clear
+[X] Updated cursor rules with lessons learned about canvas theme awareness
+
+Task complete! The canvas now properly switches between light and dark modes when the theme is toggled.
+
+## Completed Task: Fix Properties Panel Dark Mode Theme Support
+
+[X] Added useTheme hook import and usage to properties-panel.tsx
+[X] Updated hardcoded text colors (text-gray-600, text-gray-500) to be theme-aware
+[X] Updated background colors (bg-gray-100, bg-gray-50) to be theme-aware
+[X] Fixed TypeScript linting error by replacing 'any' type with 'string | number'
+[X] Tested for linting errors - all clear
+[X] Updated cursor rules with properties panel theme lessons
+
+Task complete! The properties panel now properly adapts to both light and dark themes with appropriate text and background colors.
+
+## Completed Task: Fix Component Library, Toolbar, and Template Selector Dark Mode Support
+
+[X] Updated Component Library to be theme-aware
+  - Added useTheme hook import and usage
+  - Made component creation use theme-aware default colors for text and input components
+  - Updated all border colors (border-gray-200 → theme-aware)
+  - Updated all text colors (text-gray-700, text-gray-500 → theme-aware)
+  - Updated search icon color to be theme-appropriate
+
+[X] Updated Toolbar to be theme-aware
+  - Added useTheme hook import and usage
+  - Updated background color (bg-white → theme-aware)
+  - Updated border color (border-gray-200 → theme-aware)
+
+[X] Updated Template Selector to be theme-aware  
+  - Added useTheme hook import and usage
+  - Updated all text colors (text-gray-600, text-gray-500 → theme-aware)
+  - Updated border colors for template cards
+  - Updated preview background colors
+  - Updated device icon colors
+
+[X] All components now properly adapt to dark mode with appropriate contrast
+[X] No linting errors in any canvas components
+[X] Theme switching works seamlessly across all UI elements
+
+Task complete! All canvas interface components now provide an excellent dark mode experience matching the overall application theming.
+
+## Completed Task: Fix Canvas Designer Layout Dark Mode Support
+
+[X] Fixed the main canvas designer wrapper component to be theme-aware
+[X] Updated main container background (bg-gray-50 → theme-aware: #171717 dark, #f9fafb light)
+[X] Updated Component Library sidebar background (bg-white → #171717 dark, #ffffff light)
+[X] Updated Properties Panel sidebar background (bg-white → #171717 dark, #ffffff light)  
+[X] Updated all border colors (border-gray-200 → #292929 dark, #e5e7eb light)
+[X] Updated mobile menu button backgrounds to be theme-aware with custom colors
+[X] Updated mobile header border colors for both sidebars with custom colors
+[X] All layout containers now properly adapt to dark/light themes with specific hex colors
+[X] Applied client-requested dark mode colors: #171717 background, #292929 borders
+[X] No linting errors - all clean
+
+Task complete! The entire canvas interface now has perfect dark mode support with custom brand colors: #171717 backgrounds and #292929 borders.
+
+## Completed Task: Update Canvas and Toolbar to Custom Brand Colors
+
+[X] Updated canvas background color to use #171717 in dark mode
+[X] Updated canvas container background to use #171717 in dark mode  
+[X] Updated toolbar background to use #171717 in dark mode
+[X] Updated toolbar border to use #292929 in dark mode
+[X] All components now use consistent custom brand colors
+[X] No linting errors - all clean
+
+Task complete! Canvas background and toolbar now match the custom brand colors: #171717 backgrounds and #292929 borders throughout the entire interface.
 
 # General
 

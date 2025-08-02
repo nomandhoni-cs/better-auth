@@ -1,58 +1,60 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#242424] text-white">
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Top left orbs gradient background */}
-        <div className="absolute top-0 left-0 w-[800px] h-[600px]">
-          <Image
-            src="/images/gradient-orb.png"
-            alt="Background gradient top left"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-        </div>
-        {/* Bottom right orbs gradient background */}
-        <div className="absolute bottom-0 right-0 w-[800px] h-[600px]">
-          <Image
-            src="/images/gradient-orb2.png"
-            alt="Background gradient bottom right"
-            fill
-            className="object-cover opacity-20 rotate-180"
-            priority
-          />
-        </div>
-        {/* Subtle dots overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] [background-size:16px_16px]" />
+    <div className="min-h-screen bg-[#040404] text-white relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/landingpageBg.png"
+          alt="Landing page background"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
-      {/* Hero Section */}
-      <main className="relative max-w-6xl mx-auto px-6 pt-[152px]">
-        <div className="space-y-8 text-center">
-          <h1 className="font-['Flavors'] text-[6rem] tracking-[-0.02em] leading-[1.1] bg-clip-text text-transparent bg-gradient-to-r from-[#b17f01] via-[#7a7a7a] to-[#a600c3]">
-            The Best Nextjs / Better Auth Starter theme
-          </h1>
+      {/* Main content */}
+      <main className="relative flex items-center justify-center min-h-screen px-6">
+        <div className="flex items-center justify-between w-full max-w-7xl">
+          {/* Left side - Text content */}
+          <div className="flex-1">
+            <h1 className="text-[10rem] font-normal tracking-wide text-white leading-none mb-4">
+              Orchestra
+            </h1>
+            <p className="text-[#4ade80] text-2xl font-light tracking-wide mb-8">
+              Your all in one Saas Queuing Solution
+            </p>
 
-          <p className="text-xl text-[#7a7a7a] max-w-xl mx-auto">
-            The all in one nextjs starter theme with betterauth + Neon db.
-          </p>
-        </div>
+            {/* Buttons */}
+            <div className="flex gap-6">
+              <Link
+                href="/sign-in"
+                className="px-8 py-3 bg-[#030303]  border border-white/20 rounded-lg text-white hover:bg-[#44cc00]/20 transition-all duration-300 text-lg font-light"
+              >
+                Login to the application
+              </Link>
+              <Link
+                href="/"
+                className="px-8 py-3 bg-transparent  border border-white/20 rounded-lg text-white hover:bg-[#44cc00]/20 transition-all duration-300 text-lg font-light"
+              >
+                Go to the Docs
+              </Link>
+            </div>
+          </div>
 
-        {/* Product Preview */}
-        <div className="relative mt-10">
-          <Image
-            src="/images/app-preview.png"
-            alt="Better Auth Preview"
-            width={1400}
-            height={700}
-            className="object-contain w-full h-full rounded-lg"
-            priority
-          />
-
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#242424] via-transparent to-transparent" />
+          {/* Right side - Number 9 logo */}
+          <div className="flex-shrink-0 ml-16">
+            <Image
+              src="/images/Number 9.png"
+              alt="Orchestra 9 Logo"
+              width={400}
+              height={400}
+              className="object-contain"
+              priority
+            />
+          </div>
         </div>
       </main>
     </div>

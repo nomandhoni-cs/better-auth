@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { TopBar } from "@/components/TopBar";
-import { MobileSidebar } from "@/components/MobileSidebar";
-import { Sidebar } from "@/components/Sidebar";
+import { TopBar } from "@/components/dashboard/TopBar";
+import { MobileSidebar } from "@/components/dashboard/MobileSidebar";
+import { Sidebar } from "@/components/dashboard/Sidebar";
 
 export function DashboardLayoutClient({
   children,
@@ -45,7 +45,7 @@ export function DashboardLayoutClient({
           isOpen={isMobileSidebarOpen}
           onClose={() => setIsMobileSidebarOpen(false)}
         />
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1">{children}</main>
       </div>
     </>
   );

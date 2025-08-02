@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Quicksand } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -21,7 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${quicksand.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${quicksand.variable} antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Flavors&display=swap"
@@ -29,8 +34,15 @@ export default function RootLayout({
         />
       </head>
       <body className="font-quicksand">
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

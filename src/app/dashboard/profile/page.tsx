@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Breadcrumbs } from "@/components/dashboard/Breadcrumbs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from "react";
 
@@ -9,13 +9,13 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="container mx-auto px-6 md:px-0 pb-8 ">
+    <div className="container mx-auto px-6 pb-8 ">
       <div className="mb-2">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
       <main className="flex-1 p-0 pt-4">
-        <Card className="bg-[#2A2A2A] border border-[#424242]">
+        <Card className="shadow-none">
           <CardHeader>
             <CardTitle className="font-medium text-[#A0A0A0]">
               Profile
