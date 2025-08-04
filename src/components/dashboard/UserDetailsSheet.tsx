@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { User } from "@/types/user";
-import { MapPin, Clock, Shield, Briefcase, Users, Star } from "lucide-react";
+import { MapPin, Clock, Shield, Users } from "lucide-react";
 
 interface UserDetailsSheetProps {
   user: User | null;

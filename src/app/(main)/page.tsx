@@ -36,7 +36,7 @@ export default function Home() {
                 Login to the application
               </Link>
               <Link
-                href="/"
+                href="/docs"
                 className="px-8 py-3 bg-transparent  border border-white/20 rounded-lg text-white hover:bg-[#44cc00]/20 transition-all duration-300 text-lg font-light"
               >
                 Go to the Docs
@@ -46,14 +46,16 @@ export default function Home() {
 
           {/* Right side - Number 9 logo */}
           <div className="flex-shrink-0 ml-16">
-            <Image
-              src="/images/Number 9.png"
-              alt="Orchestra 9 Logo"
-              width={400}
-              height={400}
-              className="object-contain"
-              priority
-            />
+            <div className="animate-float">
+              <Image
+                src="/images/Number 9.png"
+                alt="Orchestra 9 Logo"
+                width={400}
+                height={400}
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
         </div>
       </main>

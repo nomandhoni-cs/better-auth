@@ -61,7 +61,7 @@
   --background: oklch(0.205 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.2178 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --card-foreground: oklch(0.8297 0 0);
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
@@ -173,7 +173,6 @@
       system-ui,
       -apple-system;
     height: 100%;
-    overflow: hidden;
   }
   * {
     @apply border-border outline-ring/50;
@@ -183,6 +182,267 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
   }
+}
+
+/* Docs Content Styling */
+.docs-content .grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.docs-content .grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.docs-content .md\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.docs-content .lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.docs-content .p-6 {
+  padding: 1.5rem;
+}
+
+.docs-content .border {
+  border-width: 1px;
+}
+
+.docs-content .border-gray-200 {
+  border-color: rgb(229 231 235);
+}
+
+html.dark .docs-content .border-gray-700 {
+  border-color: rgb(55 65 81);
+}
+
+.docs-content .rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.docs-content .hover\:shadow-md:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.docs-content .transition-shadow {
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.docs-content .flex {
+  display: flex;
+}
+
+.docs-content .items-center {
+  align-items: center;
+}
+
+.docs-content .gap-3 {
+  gap: 0.75rem;
+}
+
+.docs-content .mb-4 {
+  margin-bottom: 1rem;
+}
+
+.docs-content .w-8 {
+  width: 2rem;
+}
+
+.docs-content .h-8 {
+  height: 2rem;
+}
+
+.docs-content .bg-black {
+  background-color: rgb(0 0 0);
+}
+
+.docs-content .bg-orange-500 {
+  background-color: rgb(249 115 22);
+}
+
+.docs-content .bg-purple-600 {
+  background-color: rgb(147 51 234);
+}
+
+.docs-content .rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.docs-content .text-white {
+  color: rgb(255 255 255);
+}
+
+.docs-content .font-bold {
+  font-weight: 700;
+}
+
+.docs-content .text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.docs-content .font-semibold {
+  font-weight: 600;
+}
+
+.docs-content .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.docs-content .text-gray-600 {
+  color: rgb(75 85 99);
+}
+
+html.dark .docs-content .text-gray-400 {
+  color: rgb(156 163 175);
+}
+
+.docs-content .text-green-600 {
+  color: rgb(22 163 74);
+}
+
+.docs-content .text-blue-600 {
+  color: rgb(37 99 235);
+}
+
+.docs-content .text-purple-600 {
+  color: rgb(147 51 234);
+}
+
+.docs-content .font-medium {
+  font-weight: 500;
+}
+
+.docs-content .my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Code block styling */
+.docs-content pre {
+  background-color: rgb(249 250 251);
+  border: 1px solid rgb(229 231 235);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+html.dark .docs-content pre {
+  background-color: #292929 !important;
+  border-color: #292929 !important;
+}
+
+.docs-content code {
+  background-color: rgb(243 244 246);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+html.dark .docs-content code {
+  background-color: #292929 !important;
+}
+
+/* List styling */
+.docs-content ul,
+.docs-content ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.docs-content li {
+  margin: 0.5rem 0;
+}
+
+/* Blockquote styling */
+.docs-content blockquote {
+  border-left: 4px solid rgb(59 130 246);
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+/* Horizontal rule styling */
+.docs-content hr {
+  border: none;
+  border-top: 1px solid rgb(229 231 235);
+  margin: 2rem 0;
+}
+
+html.dark .docs-content hr {
+  border-top-color: rgb(75 85 99);
+}
+
+/* Prose code block overrides for custom brand colors */
+.docs-content .prose pre {
+  background-color: rgb(249 250 251);
+  border-color: rgb(229 231 235);
+}
+
+html.dark .docs-content .prose pre {
+  background-color: #292929 !important;
+  border-color: #292929 !important;
+}
+
+.docs-content .prose code {
+  background-color: rgb(243 244 246);
+}
+
+html.dark .docs-content .prose code {
+  background-color: #292929 !important;
+}
+/* Custom heading styles - Apply green color to all headings */
+.docs-content h1 {
+  color: #44cc00 !important;
+  font-size: 48px !important;
+  font-weight: bold !important;
+  margin-bottom: 24px !important;
+}
+
+.docs-content h2 {
+  color: #838383 !important;
+  font-size: 36px !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+}
+
+html.dark .docs-content h2 {
+  color: #838383 !important;
+}
+
+.docs-content h3 {
+  color: #44cc00 !important;
+  font-size: 28px !important;
+  font-weight: bold !important;
+  margin-bottom: 16px !important;
+}
+
+.docs-content h4 {
+  color: #44cc00 !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  margin-bottom: 14px !important;
+}
+
+.docs-content h5 {
+  color: #44cc00 !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  margin-bottom: 12px !important;
+}
+
+.docs-content h6 {
+  color: #44cc00 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  margin-bottom: 10px !important;
 }

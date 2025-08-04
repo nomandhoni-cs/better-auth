@@ -249,7 +249,9 @@ export function PropertiesPanel() {
                       <Label htmlFor="text">Button Text</Label>
                       <Input
                         id="text"
-                        value={selectedComponent.properties.text || ""}
+                        value={
+                          (selectedComponent.properties.text as string) || ""
+                        }
                         onChange={(e) => updateProperty("text", e.target.value)}
                       />
                     </div>
@@ -260,8 +262,8 @@ export function PropertiesPanel() {
                           id="backgroundColor"
                           type="color"
                           value={
-                            selectedComponent.properties.backgroundColor ||
-                            "#3b82f6"
+                            (selectedComponent.properties
+                              .backgroundColor as string) || "#3b82f6"
                           }
                           onChange={(e) =>
                             updateProperty("backgroundColor", e.target.value)
@@ -270,8 +272,8 @@ export function PropertiesPanel() {
                         />
                         <Input
                           value={
-                            selectedComponent.properties.backgroundColor ||
-                            "#3b82f6"
+                            (selectedComponent.properties
+                              .backgroundColor as string) || "#3b82f6"
                           }
                           onChange={(e) =>
                             updateProperty("backgroundColor", e.target.value)
@@ -287,7 +289,8 @@ export function PropertiesPanel() {
                           id="textColor"
                           type="color"
                           value={
-                            selectedComponent.properties.textColor || "#ffffff"
+                            (selectedComponent.properties
+                              .textColor as string) || "#ffffff"
                           }
                           onChange={(e) =>
                             updateProperty("textColor", e.target.value)
@@ -296,7 +299,8 @@ export function PropertiesPanel() {
                         />
                         <Input
                           value={
-                            selectedComponent.properties.textColor || "#ffffff"
+                            (selectedComponent.properties
+                              .textColor as string) || "#ffffff"
                           }
                           onChange={(e) =>
                             updateProperty("textColor", e.target.value)
@@ -307,11 +311,16 @@ export function PropertiesPanel() {
                     </div>
                     <div>
                       <Label>
-                        Font Size: {selectedComponent.properties.fontSize || 14}
+                        Font Size:{" "}
+                        {(selectedComponent.properties.fontSize as number) ||
+                          14}
                         px
                       </Label>
                       <Slider
-                        value={[selectedComponent.properties.fontSize || 14]}
+                        value={[
+                          (selectedComponent.properties.fontSize as number) ||
+                            14,
+                        ]}
                         onValueChange={(value) =>
                           updateProperty("fontSize", value[0])
                         }
@@ -324,12 +333,15 @@ export function PropertiesPanel() {
                     <div>
                       <Label>
                         Border Radius:{" "}
-                        {selectedComponent.properties.borderRadius || 6}px
+                        {(selectedComponent.properties
+                          .borderRadius as number) || 6}
+                        px
                       </Label>
                       <div className="flex gap-2 mt-2">
                         <Slider
                           value={[
-                            selectedComponent.properties.borderRadius ?? 6,
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 6,
                           ]}
                           onValueChange={(value) =>
                             updateProperty("borderRadius", value[0])
@@ -341,7 +353,10 @@ export function PropertiesPanel() {
                         />
                         <Input
                           type="number"
-                          value={selectedComponent.properties.borderRadius ?? 6}
+                          value={
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 6
+                          }
                           onChange={(e) =>
                             updateProperty(
                               "borderRadius",
@@ -378,7 +393,9 @@ export function PropertiesPanel() {
                       <Label htmlFor="text">Text Content</Label>
                       <Input
                         id="text"
-                        value={selectedComponent.properties.text || ""}
+                        value={
+                          (selectedComponent.properties.text as string) || ""
+                        }
                         onChange={(e) => updateProperty("text", e.target.value)}
                       />
                     </div>
@@ -389,7 +406,8 @@ export function PropertiesPanel() {
                           id="textColor"
                           type="color"
                           value={
-                            selectedComponent.properties.textColor || "#000000"
+                            (selectedComponent.properties
+                              .textColor as string) || "#000000"
                           }
                           onChange={(e) =>
                             updateProperty("textColor", e.target.value)
@@ -398,7 +416,8 @@ export function PropertiesPanel() {
                         />
                         <Input
                           value={
-                            selectedComponent.properties.textColor || "#000000"
+                            (selectedComponent.properties
+                              .textColor as string) || "#000000"
                           }
                           onChange={(e) =>
                             updateProperty("textColor", e.target.value)
@@ -409,11 +428,16 @@ export function PropertiesPanel() {
                     </div>
                     <div>
                       <Label>
-                        Font Size: {selectedComponent.properties.fontSize || 16}
+                        Font Size:{" "}
+                        {(selectedComponent.properties.fontSize as number) ||
+                          16}
                         px
                       </Label>
                       <Slider
-                        value={[selectedComponent.properties.fontSize || 16]}
+                        value={[
+                          (selectedComponent.properties.fontSize as number) ||
+                            16,
+                        ]}
                         onValueChange={(value) =>
                           updateProperty("fontSize", value[0])
                         }
@@ -438,7 +462,10 @@ export function PropertiesPanel() {
                       <Label htmlFor="placeholder">Placeholder Text</Label>
                       <Input
                         id="placeholder"
-                        value={selectedComponent.properties.placeholder || ""}
+                        value={
+                          (selectedComponent.properties
+                            .placeholder as string) || ""
+                        }
                         onChange={(e) =>
                           updateProperty("placeholder", e.target.value)
                         }
@@ -451,8 +478,8 @@ export function PropertiesPanel() {
                           id="backgroundColor"
                           type="color"
                           value={
-                            selectedComponent.properties.backgroundColor ||
-                            "#ffffff"
+                            (selectedComponent.properties
+                              .backgroundColor as string) || "#ffffff"
                           }
                           onChange={(e) =>
                             updateProperty("backgroundColor", e.target.value)
@@ -461,8 +488,8 @@ export function PropertiesPanel() {
                         />
                         <Input
                           value={
-                            selectedComponent.properties.backgroundColor ||
-                            "#ffffff"
+                            (selectedComponent.properties
+                              .backgroundColor as string) || "#ffffff"
                           }
                           onChange={(e) =>
                             updateProperty("backgroundColor", e.target.value)
@@ -473,11 +500,16 @@ export function PropertiesPanel() {
                     </div>
                     <div>
                       <Label>
-                        Font Size: {selectedComponent.properties.fontSize || 14}
+                        Font Size:{" "}
+                        {(selectedComponent.properties.fontSize as number) ||
+                          14}
                         px
                       </Label>
                       <Slider
-                        value={[selectedComponent.properties.fontSize || 14]}
+                        value={[
+                          (selectedComponent.properties.fontSize as number) ||
+                            14,
+                        ]}
                         onValueChange={(value) =>
                           updateProperty("fontSize", value[0])
                         }
@@ -490,12 +522,15 @@ export function PropertiesPanel() {
                     <div>
                       <Label>
                         Border Radius:{" "}
-                        {selectedComponent.properties.borderRadius || 4}px
+                        {(selectedComponent.properties
+                          .borderRadius as number) || 4}
+                        px
                       </Label>
                       <div className="flex gap-2 mt-2">
                         <Slider
                           value={[
-                            selectedComponent.properties.borderRadius ?? 4,
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 4,
                           ]}
                           onValueChange={(value) =>
                             updateProperty("borderRadius", value[0])
@@ -507,7 +542,10 @@ export function PropertiesPanel() {
                         />
                         <Input
                           type="number"
-                          value={selectedComponent.properties.borderRadius ?? 4}
+                          value={
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 4
+                          }
                           onChange={(e) =>
                             updateProperty(
                               "borderRadius",
@@ -547,11 +585,16 @@ export function PropertiesPanel() {
                       >
                         <div>
                           Image Source:{" "}
-                          {selectedComponent.properties.src.substring(0, 50)}...
+                          {(
+                            selectedComponent.properties.src as string
+                          ).substring(0, 50)}
+                          ...
                         </div>
                         <div>
                           Type:{" "}
-                          {selectedComponent.properties.src.startsWith("data:")
+                          {(
+                            selectedComponent.properties.src as string
+                          ).startsWith("data:")
                             ? "Uploaded File"
                             : "URL"}
                         </div>
@@ -605,9 +648,11 @@ export function PropertiesPanel() {
                       <Input
                         id="src"
                         value={
-                          selectedComponent.properties.src?.startsWith("data:")
+                          (
+                            selectedComponent.properties.src as string
+                          )?.startsWith("data:")
                             ? ""
-                            : selectedComponent.properties.src || ""
+                            : (selectedComponent.properties.src as string) || ""
                         }
                         onChange={(e) => {
                           updateProperty("src", e.target.value);
@@ -630,7 +675,8 @@ export function PropertiesPanel() {
                       <div className="flex gap-2 mt-2">
                         <Slider
                           value={[
-                            selectedComponent.properties.borderRadius ?? 4,
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 4,
                           ]}
                           onValueChange={(value) =>
                             updateProperty("borderRadius", value[0])
@@ -642,7 +688,10 @@ export function PropertiesPanel() {
                         />
                         <Input
                           type="number"
-                          value={selectedComponent.properties.borderRadius ?? 4}
+                          value={
+                            (selectedComponent.properties
+                              .borderRadius as number) ?? 4
+                          }
                           onChange={(e) =>
                             updateProperty(
                               "borderRadius",

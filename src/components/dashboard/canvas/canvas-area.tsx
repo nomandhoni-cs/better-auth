@@ -28,10 +28,6 @@ export function CanvasArea() {
 
   // Alt key state for duplication
   const [isAltPressed, setIsAltPressed] = useState(false);
-  const [isDuplicating, setIsDuplicating] = useState(false);
-  const [duplicatedComponent, setDuplicatedComponent] = useState<string | null>(
-    null
-  );
 
   // Store loaded images to avoid reloading
   const [loadedImages, setLoadedImages] = useState<
@@ -56,9 +52,9 @@ export function CanvasArea() {
       switch (type) {
         case "button":
           // Background
-          ctx.fillStyle = properties.backgroundColor || "#3b82f6";
+          ctx.fillStyle = (properties.backgroundColor as string) || "#3b82f6";
           ctx.beginPath();
-          const buttonRadius = properties.borderRadius ?? 6;
+          const buttonRadius = (properties.borderRadius as number) ?? 6;
           if (buttonRadius > 0) {
             ctx.roundRect(x, y, width, height, buttonRadius);
           } else {
@@ -67,12 +63,12 @@ export function CanvasArea() {
           ctx.fill();
 
           // Text
-          ctx.fillStyle = properties.textColor || "#ffffff";
-          ctx.font = `${properties.fontSize || 14}px Arial`;
+          ctx.fillStyle = (properties.textColor as string) || "#ffffff";
+          ctx.font = `${(properties.fontSize as number) || 14}px Arial`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fillText(
-            properties.text || "Button",
+            (properties.text as string) || "Button",
             x + width / 2,
             y + height / 2
           );
@@ -80,23 +76,23 @@ export function CanvasArea() {
 
         case "text":
           ctx.fillStyle =
-            properties.textColor ||
+            (properties.textColor as string) ||
             (resolvedTheme === "dark" ? "#ffffff" : "#000000");
-          ctx.font = `${properties.fontSize || 16}px Arial`;
+          ctx.font = `${(properties.fontSize as number) || 16}px Arial`;
           ctx.textAlign = "left";
           ctx.textBaseline = "top";
-          ctx.fillText(properties.text || "Text", x, y);
+          ctx.fillText((properties.text as string) || "Text", x, y);
           break;
 
         case "input":
           // Background
           ctx.fillStyle =
-            properties.backgroundColor ||
+            (properties.backgroundColor as string) ||
             (resolvedTheme === "dark" ? "#374151" : "#ffffff");
           ctx.strokeStyle = resolvedTheme === "dark" ? "#6b7280" : "#d1d5db";
           ctx.lineWidth = 1;
           ctx.beginPath();
-          const inputRadius = properties.borderRadius ?? 4;
+          const inputRadius = (properties.borderRadius as number) ?? 4;
           if (inputRadius > 0) {
             ctx.roundRect(x, y, width, height, inputRadius);
           } else {
@@ -107,11 +103,11 @@ export function CanvasArea() {
 
           // Placeholder text
           ctx.fillStyle = resolvedTheme === "dark" ? "#d1d5db" : "#9ca3af";
-          ctx.font = `${properties.fontSize || 14}px Arial`;
+          ctx.font = `${(properties.fontSize as number) || 14}px Arial`;
           ctx.textAlign = "left";
           ctx.textBaseline = "middle";
           ctx.fillText(
-            properties.placeholder || "Input",
+            (properties.placeholder as string) || "Input",
             x + 8,
             y + height / 2
           );
@@ -123,7 +119,7 @@ export function CanvasArea() {
           ctx.strokeStyle = resolvedTheme === "dark" ? "#6b7280" : "#d1d5db";
           ctx.lineWidth = 1;
           ctx.beginPath();
-          const imageRadius = properties.borderRadius ?? 4;
+          const imageRadius = (properties.borderRadius as number) ?? 4;
           if (imageRadius > 0) {
             ctx.roundRect(x, y, width, height, imageRadius);
           } else {
@@ -132,8 +128,9 @@ export function CanvasArea() {
           ctx.fill();
           ctx.stroke();
 
+          // Draw image if available
           if (properties.src) {
-            const img = loadedImages.get(properties.src);
+            const img = loadedImages.get(properties.src as string);
             if (img && img.complete && img.naturalWidth > 0) {
               // Save context for clipping
               ctx.save();
@@ -152,14 +149,14 @@ export function CanvasArea() {
 
               // Restore context
               ctx.restore();
-            } else if (!loadedImages.has(properties.src)) {
+            } else if (!loadedImages.has(properties.src as string)) {
               // Load the image if not already loading/loaded
               const newImg = new Image();
               newImg.crossOrigin = "anonymous";
               newImg.onload = () => {
                 setLoadedImages((prev) => {
                   const newMap = new Map(prev);
-                  newMap.set(properties.src, newImg);
+                  newMap.set(properties.src as string, newImg);
                   return newMap;
                 });
                 // Force a redraw when image loads
@@ -171,14 +168,14 @@ export function CanvasArea() {
                 console.error("Failed to load image:", properties.src, e);
                 setLoadedImages((prev) => {
                   const newMap = new Map(prev);
-                  newMap.delete(properties.src);
+                  newMap.delete(properties.src as string);
                   return newMap;
                 });
               };
-              newImg.src = properties.src;
+              newImg.src = properties.src as string;
               setLoadedImages((prev) => {
                 const newMap = new Map(prev);
-                newMap.set(properties.src, newImg);
+                newMap.set(properties.src as string, newImg);
                 return newMap;
               });
 
@@ -576,8 +573,6 @@ export function CanvasArea() {
         setIsDragging(true);
         setDragStart({ x: pos.x - duplicated.x, y: pos.y - duplicated.y });
         setDragComponent(duplicated.id);
-        setIsDuplicating(true);
-        setDuplicatedComponent(duplicated.id);
       } else {
         dispatch({ type: "SELECT_COMPONENT", id: component.id });
         setIsDragging(true);
@@ -796,8 +791,6 @@ export function CanvasArea() {
     setIsPanning(false);
     setIsResizing(false);
     setResizeHandle(null);
-    setIsDuplicating(false);
-    setDuplicatedComponent(null);
 
     // Reset cursor
     const canvas = canvasRef.current;
@@ -816,7 +809,7 @@ export function CanvasArea() {
     e.preventDefault();
     const componentType = e.dataTransfer.getData("componentType");
     if (componentType) {
-      const pos = getMousePos(e as any);
+      const pos = getMousePos(e as React.MouseEvent);
       const component: CanvasComponent = {
         id: `${componentType}-${Date.now()}`,
         type: componentType as CanvasComponent["type"],

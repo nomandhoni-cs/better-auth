@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  // Configure page extensions for when Nextra is added
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };
 
 export default nextConfig;

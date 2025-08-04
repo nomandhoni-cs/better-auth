@@ -10,7 +10,7 @@ export type CanvasComponent = {
   y: number;
   width: number;
   height: number;
-  properties: Record<string, any>;
+  properties: Record<string, string | number | boolean>;
 };
 
 export type Template = {

@@ -83,6 +83,14 @@ export default function Page({ searchParams }: PageProps) {
   - Dark mode: background #171717, borders #292929, text #ffffff, placeholders #d1d5db, UI text text-gray-400, UI backgrounds #171717
   - Light mode: background #ffffff, borders #e5e7eb, text #000000, placeholders #9ca3af, UI text text-gray-500/text-gray-600, UI backgrounds bg-gray-50/bg-gray-100
 
+## Docs Theme Awareness
+
+- Docs pages use Tailwind prose classes for content styling
+- Code blocks in docs need custom CSS overrides to use brand colors (#292929 in dark mode)
+- Remove `prose-pre:bg-muted` from prose classes to prevent default muted background
+- Add custom CSS rules with `!important` to override prose defaults for code blocks
+- Both `pre` and `code` elements need custom dark mode styling in docs content
+
 # Project Structure
 
 ## Types
@@ -186,6 +194,32 @@ Task complete! The entire canvas interface now has perfect dark mode support wit
 [X] No linting errors - all clean
 
 Task complete! Canvas background and toolbar now match the custom brand colors: #171717 backgrounds and #292929 borders throughout the entire interface.
+
+## Completed Task: Fix Docs Page Styling and Add Theme Switcher
+
+[X] Resolved Next.js routing conflict by removing conflicting /docs/page.tsx route
+[X] Updated docs layout to match project's design system with proper header
+[X] Added theme switcher to docs page header
+[X] Updated docs page content to use project's design system classes (bg-background, text-foreground, border-border, etc.)
+[X] Added navigation link back to main app in docs header
+[X] Removed old docs.css file as it's no longer needed
+[X] Ensured theme provider is properly configured at root level
+[X] All styling now consistent with rest of project
+[X] Theme switching works seamlessly in docs section
+
+Task complete! The docs page now looks consistent with the rest of the project and includes a functional theme switcher.
+
+## Completed Task: Fix Docs Page Code Blocks Dark Mode Support
+
+[X] Identified issue: docs page code blocks using default prose muted background instead of custom brand color #292929
+[X] Removed `prose-pre:bg-muted` from prose classes to prevent default muted background
+[X] Added custom CSS overrides in globals.css for docs content code blocks
+[X] Updated both `pre` and `code` elements to use #292929 background in dark mode
+[X] Added `!important` declarations to override prose defaults
+[X] Updated cursor rules with docs theme awareness lessons
+[X] No linting errors - all clean
+
+Task complete! The docs page code blocks now properly use the custom brand color #292929 in dark mode instead of staying white.
 
 # General
 

@@ -4,7 +4,7 @@ import React from "react";
 
 export default function SurfaceEditorPage() {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full overflow-hidden">
       <CanvasProvider>
         <CanvasDesigner />
       </CanvasProvider>

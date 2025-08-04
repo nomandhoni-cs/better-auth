@@ -11,7 +11,7 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
 
   return (
     <aside
-      className={`bg-sidebar-primary h-screen border-r transition-all duration-300 fixed left-0 top-0 z-0 ${
+      className={`bg-sidebar-primary h-screen border-r transition-all duration-300 fixed left-0 top-0 z-10 ${
         isCollapsed ? "w-16" : "w-64"
       }`}
     >

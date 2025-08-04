@@ -16,7 +16,7 @@ export function CanvasDesigner() {
 
   return (
     <div
-      className="flex h-screen overflow-hidden"
+      className="flex h-full overflow-hidden"
       style={{
         backgroundColor: resolvedTheme === "dark" ? "#171717" : "#f9fafb",
       }}
