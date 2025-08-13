@@ -60,9 +60,9 @@ export function TwoFactorSetup({ onEnabled }: TwoFactorSetupProps) {
     } catch (error: unknown) {
       console.error('Failed to start 2FA setup:', error);
       console.error('Error details:', {
-        message: error?.message,
-        status: error?.status,
-        response: error?.response,
+        message: error,
+        status: error,
+        response: error,
       });
       
       toast.error('Failed to start 2FA setup. Please check your password and try again.');
@@ -102,9 +102,9 @@ export function TwoFactorSetup({ onEnabled }: TwoFactorSetupProps) {
     } catch (error: unknown) {
       console.error('Failed to verify 2FA code:', error);
       console.error('Error details:', {
-        message: error?.message,
-        status: error?.status,
-        response: error?.response,
+        message: error,
+        status: error,
+        response: error,
       });
       toast.error('Invalid verification code. Please try again.');
     } finally {

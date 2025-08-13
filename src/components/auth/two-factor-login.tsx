@@ -10,11 +10,13 @@ import { toast } from 'sonner';
 import { Shield, ArrowLeft } from 'lucide-react';
 
 interface TwoFactorLoginProps {
+  email?: string;
+  password?: string;
   onBack: () => void;
   onSuccess: () => void;
 }
 
-export function TwoFactorLogin({ onBack, onSuccess }: TwoFactorLoginProps) {
+export function TwoFactorLogin({ email: _email, password: _password, onBack, onSuccess }: TwoFactorLoginProps) {
   const [verificationCode, setVerificationCode] = useState('');
   const [useBackupCode, setUseBackupCode] = useState(false);
   const [loading, setLoading] = useState(false);

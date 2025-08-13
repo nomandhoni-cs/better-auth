@@ -45,8 +45,13 @@ export default function Login() {
       console.log('Sign in response:', response);
 
       if (response.data) {
-        // Successful sign-in
-        router.push("/dashboard");
+        // Check if 2FA is required
+        if ((response.data as any).twoFactorRedirect) {
+          setShowTwoFactor(true);
+          setError("");
+        } else {
+          router.push("/dashboard");
+        }
       } else if (response.error) {
         // Check error message for 2FA requirement
         const errorMessage = response.error.message || "";
@@ -146,6 +151,8 @@ export default function Login() {
   if (showTwoFactor) {
     return (
       <TwoFactorLogin
+        email={email}
+        password={password}
         onBack={() => setShowTwoFactor(false)}
         onSuccess={() => router.push("/dashboard")}
       />

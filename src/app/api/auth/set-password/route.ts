@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Use Better Auth's setPassword method for social login users
     await auth.api.setPassword({
       body: {
-        password: password,
+        newPassword: password,
       },
       headers: request.headers,
     });

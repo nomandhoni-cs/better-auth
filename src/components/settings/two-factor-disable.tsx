@@ -16,16 +16,10 @@ interface TwoFactorDisableProps {
 
 export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
   const [showDisableDialog, setShowDisableDialog] = useState(false);
-  const [verificationCode, setVerificationCode] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleDisable2FA = async () => {
-    if (!verificationCode || verificationCode.length !== 6) {
-      toast.error('Please enter a valid 6-digit code');
-      return;
-    }
-
     if (!password) {
       toast.error('Please enter your password');
       return;
@@ -34,7 +28,7 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
     setLoading(true);
     try {
       const response = await authClient.twoFactor.disable({
-        code: verificationCode,
+        // code: verificationCode,
         password: password,
       });
 
@@ -42,7 +36,6 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
         toast.success('Two-factor authentication disabled successfully');
         onDisabled();
         setShowDisableDialog(false);
-        setVerificationCode('');
         setPassword('');
       }
     } catch (error) {
@@ -96,7 +89,7 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
                 <DialogTitle>Disable Two-Factor Authentication</DialogTitle>
                 <DialogDescription>
                   Are you sure you want to disable two-factor authentication? This will make your account less secure.
-                  Enter a verification code from your authenticator app to confirm.
+                  Enter your password to confirm.
                 </DialogDescription>
               </DialogHeader>
               
@@ -112,17 +105,7 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
                   />
                 </div>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="disable-verification-code">Verification Code</Label>
-                  <Input
-                    id="disable-verification-code"
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    placeholder="000000"
-                    className="text-center text-lg font-mono tracking-widest"
-                    maxLength={6}
-                  />
-                </div>
+
               </div>
 
               <DialogFooter>
@@ -130,7 +113,6 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
                   variant="outline"
                   onClick={() => {
                     setShowDisableDialog(false);
-                    setVerificationCode('');
                     setPassword('');
                   }}
                 >
@@ -139,7 +121,7 @@ export function TwoFactorDisable({ onDisabled }: TwoFactorDisableProps) {
                 <Button
                   variant="destructive"
                   onClick={handleDisable2FA}
-                  disabled={loading || verificationCode.length !== 6 || !password}
+                  disabled={loading || !password}
                 >
                   {loading ? 'Disabling...' : 'Disable 2FA'}
                 </Button>
