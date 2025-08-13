@@ -6,6 +6,7 @@ export const navigationData: NavigationSection[] = [
     items: [
       { label: "Dashboard", icon: "layoutDashboard", href: "/dashboard" },
       { label: "Profile", icon: "user", href: "/dashboard/profile" },
+      { label: "Settings", icon: "settings", href: "/dashboard/settings" },
     ],
   },
   {
@@ -67,7 +68,7 @@ export const navigationData: NavigationSection[] = [
     title: "Pages",
     items: [
       { label: "Profile", icon: "user", href: "/profile" },
-      { label: "Settings", icon: "settings", href: "/settings" },
+      { label: "Settings", icon: "settings", href: "/dashboard/settings" },
     ],
   },
   {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { TwoFactorLogin } from "@/components/auth/two-factor-login";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showMagicLink, setShowMagicLink] = useState(false);
+  const [showTwoFactor, setShowTwoFactor] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,22 +34,41 @@ export default function Login() {
   };
 
   const handleEmailSignIn = async (email: string, password: string) => {
-    const { error } = await authClient.signIn.email(
-      {
+    try {
+      const response = await authClient.signIn.email({
         email,
         password,
         callbackURL: "/dashboard",
         rememberMe: true,
-      },
-      {
-        onRequest: () => setLoading(true),
-        onSuccess: () => router.push("/dashboard"),
-        onError: (ctx) => setError(ctx.error.message || "Sign in failed"),
-      }
-    );
+      });
 
-    if (error) {
-      setError(error.message || "Sign in failed");
+      console.log('Sign in response:', response);
+
+      if (response.data) {
+        // Check if 2FA is required
+        if (response.data.twoFactorRedirect || response.data.requiresTwoFactor) {
+          setShowTwoFactor(true);
+          setError("");
+        } else {
+          router.push("/dashboard");
+        }
+      } else if (response.error) {
+        // Check error message for 2FA requirement
+        const errorMessage = response.error.message || "";
+        if (errorMessage.includes('two-factor') || 
+            errorMessage.includes('2FA') || 
+            errorMessage.includes('TOTP') ||
+            errorMessage.includes('verification') ||
+            response.error.code === 'TWO_FACTOR_REQUIRED') {
+          setShowTwoFactor(true);
+          setError("");
+        } else {
+          setError(errorMessage || "Sign in failed");
+        }
+      }
+    } catch (error: unknown) {
+      console.error('Sign in error:', error);
+      setError("An unexpected error occurred");
     }
   };
 
@@ -126,6 +147,17 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  if (showTwoFactor) {
+    return (
+      <TwoFactorLogin
+        email={email}
+        password={password}
+        onBack={() => setShowTwoFactor(false)}
+        onSuccess={() => router.push("/dashboard")}
+      />
+    );
+  }
 
   return (
     <div className="w-full space-y-8 p-8 rounded-lg shadow-md border border-white/20 bg-black/40 backdrop-blur-sm">
