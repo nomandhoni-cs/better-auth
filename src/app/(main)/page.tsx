@@ -21,7 +21,7 @@ export default function Home() {
           {/* Left side - Text content */}
           <div className="flex-1">
             <h1 className="text-[10rem] font-normal tracking-wide text-white leading-none mb-4">
-              Orchestra
+              zyntime
             </h1>
             <p className="text-[#4ade80] text-2xl font-light tracking-wide mb-8">
               Your all in one Saas Queuing Solution
@@ -49,7 +49,7 @@ export default function Home() {
             <div className="animate-float">
               <Image
                 src="/images/Number 9.png"
-                alt="Orchestra 9 Logo"
+                alt="zen"
                 width={400}
                 height={400}
                 className="object-contain"

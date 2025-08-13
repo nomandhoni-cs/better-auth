@@ -24,7 +24,7 @@ export default function DocsLayout({
                 href="/"
                 className="text-xl font-bold text-[#44cc00] hover:text-primary transition-colors"
               >
-                Orchestra 9
+                zyntime
               </Link>
               <span className="text-muted-foreground">/</span>
               <span className="text-foreground">Documentation</span>

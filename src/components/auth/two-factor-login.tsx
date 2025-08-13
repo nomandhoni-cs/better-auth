@@ -16,7 +16,7 @@ interface TwoFactorLoginProps {
   onSuccess: () => void;
 }
 
-export function TwoFactorLogin({ email, password, onBack, onSuccess }: TwoFactorLoginProps) {
+export function TwoFactorLogin({ onBack, onSuccess }: TwoFactorLoginProps) {
   const [verificationCode, setVerificationCode] = useState('');
   const [useBackupCode, setUseBackupCode] = useState(false);
   const [loading, setLoading] = useState(false);

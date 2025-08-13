@@ -122,7 +122,7 @@ export function TwoFactorSetup({ onEnabled }: TwoFactorSetupProps) {
         setTimeout(() => setCopiedCodes(false), 2000);
       }
       toast.success('Copied to clipboard!');
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };
@@ -164,8 +164,8 @@ export function TwoFactorSetup({ onEnabled }: TwoFactorSetupProps) {
               <div className="text-sm text-blue-800">
                 <p className="font-medium">Password Required</p>
                 <p>
-                  If you signed up with Google or GitHub and don't have a password, 
-                  you can set one by using the "Forgot Password" feature on the login page 
+                  If you signed up with Google or GitHub and don&apos;t have a password, 
+                  you can set one by using the &quot;Forgot Password&quot; feature on the login page 
                   with your email address.
                 </p>
               </div>

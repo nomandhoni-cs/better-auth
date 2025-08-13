@@ -56,9 +56,10 @@ export function PasswordManagement({ hasPassword, onPasswordSet }: PasswordManag
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to set password');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to set password:', error);
-      toast.error(`Failed to set password: ${error?.message || 'Please try again'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Please try again';
+      toast.error(`Failed to set password: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
@@ -96,9 +97,10 @@ export function PasswordManagement({ hasPassword, onPasswordSet }: PasswordManag
       } else if (response.error) {
         throw new Error(response.error.message);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to change password:', error);
-      toast.error(`Failed to change password: ${error?.message || 'Please check your current password'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Please check your current password';
+      toast.error(`Failed to change password: ${errorMessage}`);
     } finally {
       setLoading(false);
     }

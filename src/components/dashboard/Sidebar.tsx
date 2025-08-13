@@ -26,7 +26,7 @@ export const Sidebar = ({ isCollapsed }: { isCollapsed: boolean }) => {
           />
           {!isCollapsed && (
             <span className="text-3xl text-[#7A7A7A] font-extralight ml-3">
-              Orchestra<span className="font-extralight"> 9</span>
+              zyntime
             </span>
           )}
         </div>
