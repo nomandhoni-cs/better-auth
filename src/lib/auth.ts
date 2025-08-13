@@ -3,7 +3,7 @@ import { schema } from "@/db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { anonymous, magicLink, openAPI, twoFactor  } from "better-auth/plugins";
+import { anonymous, jwt, magicLink, openAPI, twoFactor  } from "better-auth/plugins";
 import { sendMagicLinkEmail } from "./email";
 
 
@@ -41,6 +41,7 @@ export const auth = betterAuth({
         }),
         openAPI(),
         anonymous(),
- twoFactor() 
+ twoFactor(),
+  jwt()
     ]
 });
