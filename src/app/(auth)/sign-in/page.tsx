@@ -35,6 +35,8 @@ export default function Login() {
 
   const handleEmailSignIn = async (email: string, password: string) => {
     try {
+      console.log('Attempting to sign in with:', { email, has2FA: 'checking...' });
+      
       const response = await authClient.signIn.email({
         email,
         password,
@@ -42,32 +44,33 @@ export default function Login() {
         rememberMe: true,
       });
 
-      console.log('Sign in response:', response);
+      console.log('Full sign in response:', response);
 
       if (response.data) {
-        // Check if 2FA is required
-        if ((response.data as any).twoFactorRedirect) {
+        console.log('Response data:', response.data);
+        
+        // Check for 2FA redirect in multiple possible formats
+        const data = response.data as {
+          twoFactorRedirect?: boolean;
+          redirect?: boolean;
+          requiresTwoFactor?: boolean;
+        };
+        if (data.twoFactorRedirect === true || data.redirect === true || data.requiresTwoFactor === true) {
+          console.log('2FA required - showing 2FA form');
           setShowTwoFactor(true);
           setError("");
-        } else {
-          router.push("/dashboard");
+          return;
         }
+        
+        // If no 2FA required, redirect to dashboard
+        console.log('No 2FA required - redirecting to dashboard');
+        router.push("/dashboard");
       } else if (response.error) {
-        // Check error message for 2FA requirement
-        const errorMessage = response.error.message || "";
-        if (errorMessage.includes('two-factor') || 
-            errorMessage.includes('2FA') || 
-            errorMessage.includes('TOTP') ||
-            errorMessage.includes('verification') ||
-            response.error.code === 'TWO_FACTOR_REQUIRED') {
-          setShowTwoFactor(true);
-          setError("");
-        } else {
-          setError(errorMessage || "Sign in failed");
-        }
+        console.log('Sign in error:', response.error);
+        setError(response.error.message || "Sign in failed");
       }
     } catch (error: unknown) {
-      console.error('Sign in error:', error);
+      console.error('Sign in exception:', error);
       setError("An unexpected error occurred");
     }
   };
@@ -285,6 +288,15 @@ export default function Login() {
         {error && (
           <div className="text-green-500 text-sm text-center">{error}</div>
         )}
+        
+        {/* Debug button - remove in production */}
+        <button
+          type="button"
+          onClick={() => setShowTwoFactor(true)}
+          className="w-full text-xs text-gray-500 hover:text-gray-300"
+        >
+          [Debug] Test 2FA View
+        </button>
       </form>
 
       <div className="text-center">
