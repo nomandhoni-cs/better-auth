@@ -10,8 +10,6 @@ import { toast } from 'sonner';
 import { Shield, ArrowLeft } from 'lucide-react';
 
 interface TwoFactorLoginProps {
-  email?: string;
-  password?: string;
   onBack: () => void;
   onSuccess: () => void;
 }

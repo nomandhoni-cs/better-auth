@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from 'sonner';
 import { Smartphone, Key, Download, AlertTriangle, Copy, Check } from 'lucide-react';
 import QRCode from 'qrcode';
+import Image from 'next/image';
 
 interface TwoFactorSetupProps {
   onEnabled: () => void;
@@ -213,10 +214,12 @@ export function TwoFactorSetup({ onEnabled }: TwoFactorSetupProps) {
             </CardHeader>
             <CardContent className="flex justify-center">
               {qrCode && (
-                <img 
+                <Image 
                   src={qrCode} 
                   alt="2FA QR Code" 
-                  className="w-48 h-48 border rounded-lg"
+                  width={192}
+                  height={192}
+                  className="border rounded-lg"
                 />
               )}
             </CardContent>
