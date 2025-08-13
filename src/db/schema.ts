@@ -61,4 +61,11 @@ export const twoFactor = pgTable("two_factor", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
-export const schema = { user, session, account, verification, twoFactor };
+export const jwks = pgTable("jwks", {
+  id: text("id").primaryKey(),
+  publicKey: text("public_key").notNull(),
+  privateKey: text("private_key").notNull(),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+export const schema = { user, session, account, verification, twoFactor, jwks };
