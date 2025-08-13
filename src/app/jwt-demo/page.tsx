@@ -5,8 +5,29 @@ import { authClient } from "@/lib/auth-client";
 
 export default function JWTDemo() {
   const [jwtToken, setJwtToken] = useState<string>("");
-  const [jwksData, setJwksData] = useState<any>(null);
-  const [protectedData, setProtectedData] = useState<any>(null);
+  const [jwksData, setJwksData] = useState<{
+    keys: Array<{
+      kty: string;
+      use: string;
+      kid: string;
+      n: string;
+      e: string;
+      alg: string;
+    }>;
+  } | null>(null);
+  const [protectedData, setProtectedData] = useState<{
+    message: string;
+    user: {
+      id: string;
+      email: string;
+      name: string;
+    };
+    tokenInfo: {
+      issuer: string;
+      audience: string;
+      expiresAt: string;
+    };
+  } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -131,7 +152,7 @@ export default function JWTDemo() {
             <h2 className="text-xl font-semibold mb-4">Get JWKS (JSON Web Key Set)</h2>
             <p className="text-gray-300 mb-4">
               Click the button below to get the public keys used to verify JWT tokens.
-              This endpoint is public and doesn't require authentication.
+              This endpoint is public and does not require authentication.
             </p>
             <button
               onClick={getJWKS}
