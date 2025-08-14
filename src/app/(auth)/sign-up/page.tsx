@@ -19,16 +19,19 @@ export default function SignUp() {
     setError("");
 
     try {
-      const { error } = await authClient.signUp.email(
+      const { data, error } = await authClient.signUp.email(
         {
           email,
           password,
           name,
-          callbackURL: "/dashboard",
+          callbackURL: "/verify-email",
         },
         {
           onRequest: () => setLoading(true),
-          onSuccess: () => router.push("/dashboard"),
+          onSuccess: (ctx) => {
+            // Redirect to verification page instead of dashboard
+            router.push("/verify-email?email=" + encodeURIComponent(email));
+          },
           onError: (ctx) => setError(ctx.error.message || "Sign up failed"),
         }
       );
