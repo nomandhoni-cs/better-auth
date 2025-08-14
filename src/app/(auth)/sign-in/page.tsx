@@ -179,7 +179,6 @@ export default function Login() {
             // Force a hard redirect to ensure session is properly established
             window.location.href = "/dashboard";
           }}
-          callbackURL="/dashboard"
         />
         
         <div className="text-center">

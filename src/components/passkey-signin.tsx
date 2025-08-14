@@ -10,10 +10,9 @@ import { toast } from 'sonner';
 
 interface PasskeySignInProps {
   onSuccess?: () => void;
-  callbackURL?: string;
 }
 
-export function PasskeySignIn({ onSuccess, callbackURL }: PasskeySignInProps) {
+export function PasskeySignIn({ onSuccess }: PasskeySignInProps) {
   const [email, setEmail] = useState('');
   const [signingIn, setSigningIn] = useState(false);
   const [supportsConditionalUI, setSupportsConditionalUI] = useState(false);
@@ -32,11 +31,8 @@ export function PasskeySignIn({ onSuccess, callbackURL }: PasskeySignInProps) {
           
           // If supported, start conditional UI
           if (available) {
-            authClient.signIn.passkey({ 
+            void authClient.signIn.passkey({ 
               autoFill: true 
-            }).catch((error) => {
-              // Silently handle conditional UI errors as they're expected
-              console.debug('Conditional UI error (expected):', error);
             });
           }
         } catch (error) {
@@ -57,11 +53,10 @@ export function PasskeySignIn({ onSuccess, callbackURL }: PasskeySignInProps) {
     setSigningIn(true);
     try {
       const result = await authClient.signIn.passkey({
-        email: withEmail ? email.trim() : undefined,
-        callbackURL: callbackURL || '/dashboard'
+        email: withEmail ? email.trim() : undefined
       });
 
-      if (result.data) {
+      if (result?.data) {
         toast.success('Successfully signed in with passkey!');
         
         // Wait a bit for the session to be established
@@ -70,9 +65,11 @@ export function PasskeySignIn({ onSuccess, callbackURL }: PasskeySignInProps) {
             onSuccess();
           } else {
             // Redirect to dashboard if no onSuccess callback
-            window.location.href = callbackURL || '/dashboard';
+            window.location.href = '/dashboard';
           }
         }, 500);
+      } else if (result?.error) {
+        toast.error(result.error.message || 'Failed to sign in with passkey');
       }
     } catch (error: unknown) {
       console.error('Passkey sign-in failed:', error);
