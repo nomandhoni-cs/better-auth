@@ -11,10 +11,10 @@ import { toast } from 'sonner';
 
 interface Passkey {
   id: string;
-  name: string | null;
+  name?: string;
   deviceType: string;
   backedUp: boolean;
-  createdAt: string;
+  createdAt: Date;
 }
 
 export function PasskeyManager() {
@@ -112,7 +112,7 @@ export function PasskeyManager() {
 
   const startEditing = (passkey: Passkey) => {
     setEditingId(passkey.id);
-    setEditingName(passkey.name || '');
+    setEditingName(passkey.name ?? '');
   };
 
   const cancelEditing = () => {
@@ -237,7 +237,7 @@ export function PasskeyManager() {
                       <>
                         <div className="flex items-center gap-2">
                           <p className="font-medium">
-                            {passkey.name || 'Unnamed Passkey'}
+                            {passkey.name ?? 'Unnamed Passkey'}
                           </p>
                           <Button
                             size="sm"

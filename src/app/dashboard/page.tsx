@@ -33,7 +33,7 @@ export default function Dashboard() {
           // Check if user just verified their email
           if (searchParams.get('verified') === 'true' && session.data.user.emailVerified) {
             setShowVerifiedMessage(true);
-            // Remove the query parameter
+            // Remove the query parametera
             router.replace('/dashboard');
           }
         } else {
