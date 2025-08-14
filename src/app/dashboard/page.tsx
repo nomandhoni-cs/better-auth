@@ -7,11 +7,16 @@ import { EmailVerificationBanner, EmailVerifiedBanner } from '@/components/email
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Dashboard() {
-  const [user, setUser] = useState<{ 
-    name?: string; 
-    email: string; 
-    emailVerified: boolean; 
-    twoFactorEnabled: boolean;
+  const [user, setUser] = useState<{
+    id: string;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    image?: string | null;
+    isAnonymous?: boolean | null;
+    twoFactorEnabled: boolean | null | undefined;
   } | null>(null);
   const [loading, setLoading] = useState(true);
   const [showVerifiedMessage, setShowVerifiedMessage] = useState(false);
@@ -124,7 +129,7 @@ export default function Dashboard() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-400">2FA Enabled</label>
-              <p className="text-white">{user.twoFactorEnabled ? 'Yes' : 'No'}</p>
+              <p className="text-white">{user.twoFactorEnabled === true ? 'Yes' : 'No'}</p>
             </div>
           </div>
         </div>
