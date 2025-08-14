@@ -63,19 +63,29 @@ export function PasskeySignIn({ onSuccess, callbackURL }: PasskeySignInProps) {
 
       if (result.data) {
         toast.success('Successfully signed in with passkey!');
-        onSuccess?.();
+        
+        // Wait a bit for the session to be established
+        setTimeout(() => {
+          if (onSuccess) {
+            onSuccess();
+          } else {
+            // Redirect to dashboard if no onSuccess callback
+            window.location.href = callbackURL || '/dashboard';
+          }
+        }, 500);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Passkey sign-in failed:', error);
       
       // Handle specific WebAuthn errors
-      if (error.name === 'NotAllowedError') {
+      const err = error as { name?: string; message?: string };
+      if (err.name === 'NotAllowedError') {
         toast.error('Sign-in was cancelled or timed out');
-      } else if (error.name === 'InvalidStateError') {
+      } else if (err.name === 'InvalidStateError') {
         toast.error('No passkey found for this account');
-      } else if (error.name === 'NotSupportedError') {
+      } else if (err.name === 'NotSupportedError') {
         toast.error('Passkeys are not supported on this device');
-      } else if (error.message?.includes('User not found')) {
+      } else if (err.message?.includes('User not found')) {
         toast.error('No account found with this email address');
       } else {
         toast.error('Failed to sign in with passkey. Please try again.');

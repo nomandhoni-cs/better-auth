@@ -18,7 +18,10 @@ export function EmailVerificationGuard({
   children, 
   requireVerification = false 
 }: EmailVerificationGuardProps) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ 
+    email: string; 
+    emailVerified: boolean;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const router = useRouter();
@@ -60,7 +63,7 @@ export function EmailVerificationGuard({
       } else {
         toast.success('Verification email sent! Check your inbox and click the link to verify.');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to send verification email:', error);
       if (process.env.NODE_ENV === 'development') {
         toast.info('Development mode: Check browser console for magic link!', {
@@ -139,11 +142,11 @@ export function EmailVerificationGuard({
               </div>
 
               {process.env.NODE_ENV === 'development' && (
-                <DevEmailBypass onSuccess={() => window.location.reload()} />
+                <DevEmailBypass />
               )}
 
               <div className="text-xs text-gray-500 text-center">
-                <p>Check your spam folder if you don't see the email.</p>
+                <p>Check your spam folder if you don&apos;t see the email.</p>
                 <p className="mt-1">The verification link will expire in 24 hours.</p>
                 {process.env.NODE_ENV === 'development' && (
                   <p className="mt-1 text-blue-400">Development: Magic links are logged to browser console</p>

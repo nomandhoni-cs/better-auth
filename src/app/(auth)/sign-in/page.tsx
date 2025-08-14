@@ -175,7 +175,10 @@ export default function Login() {
         </div>
         
         <PasskeySignIn 
-          onSuccess={() => router.push("/dashboard")}
+          onSuccess={() => {
+            // Force a hard redirect to ensure session is properly established
+            window.location.href = "/dashboard";
+          }}
           callbackURL="/dashboard"
         />
         

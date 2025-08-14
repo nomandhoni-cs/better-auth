@@ -59,15 +59,16 @@ export function PasskeyManager() {
       toast.success('Passkey registered successfully!');
       setPasskeyName('');
       await loadPasskeys();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to register passkey:', error);
       
       // Handle specific WebAuthn errors
-      if (error.name === 'NotAllowedError') {
+      const err = error as { name?: string; message?: string };
+      if (err.name === 'NotAllowedError') {
         toast.error('Passkey registration was cancelled or timed out');
-      } else if (error.name === 'InvalidStateError') {
+      } else if (err.name === 'InvalidStateError') {
         toast.error('This authenticator is already registered');
-      } else if (error.name === 'NotSupportedError') {
+      } else if (err.name === 'NotSupportedError') {
         toast.error('Passkeys are not supported on this device');
       } else {
         toast.error('Failed to register passkey. Please try again.');

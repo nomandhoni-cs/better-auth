@@ -39,7 +39,7 @@ export function EmailVerificationBanner({ user, onDismiss }: EmailVerificationBa
       } else {
         toast.success('Verification email sent! Check your inbox.');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to send verification email:', error);
       if (process.env.NODE_ENV === 'development') {
         toast.info('Development mode: Check browser console for magic link!', {

@@ -7,7 +7,11 @@ import { authClient } from '@/lib/auth-client';
 import { useState, useEffect } from 'react';
 
 export default function PasskeyDemo() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ 
+    name?: string; 
+    email: string; 
+    emailVerified: boolean;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

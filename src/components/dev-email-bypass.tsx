@@ -1,44 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Code, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 
-interface DevEmailBypassProps {
-  onSuccess?: () => void;
-}
-
-export function DevEmailBypass({ onSuccess }: DevEmailBypassProps) {
-  const [bypassing, setBypassing] = useState(false);
-
+export function DevEmailBypass() {
   // Only show in development
   if (process.env.NODE_ENV !== 'development') {
     return null;
   }
-
-  const handleBypassVerification = async () => {
-    setBypassing(true);
-    try {
-      // This is a development-only feature
-      // In a real app, you'd need to implement a dev-only API endpoint
-      // For now, we'll just show instructions
-      toast.info('Development bypass: Use the magic link from console', {
-        duration: 5000,
-      });
-      
-      // You could implement a dev-only API endpoint here
-      // await fetch('/api/dev/bypass-email-verification', { method: 'POST' });
-      
-    } catch (error) {
-      console.error('Bypass failed:', error);
-      toast.error('Bypass failed');
-    } finally {
-      setBypassing(false);
-    }
-  };
 
   return (
     <Card className="border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950/20">

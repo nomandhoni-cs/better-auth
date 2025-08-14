@@ -1,32 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Copy, ExternalLink, Code } from 'lucide-react';
+import { Code } from 'lucide-react';
 import { toast } from 'sonner';
 
-interface DevMagicLinkDisplayProps {
-  email: string;
-}
-
-export function DevMagicLinkDisplay({ email }: DevMagicLinkDisplayProps) {
-  const [magicLinks, setMagicLinks] = useState<string[]>([]);
-
+export function DevMagicLinkDisplay() {
   // In development, we'll simulate getting magic links from console logs
   // This is a development helper component
   if (process.env.NODE_ENV !== 'development') {
     return null;
   }
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success('Magic link copied to clipboard!');
-  };
-
-  const openInNewTab = (url: string) => {
-    window.open(url, '_blank');
-  };
 
   return (
     <Card className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/20">

@@ -7,7 +7,12 @@ import { EmailVerificationBanner, EmailVerifiedBanner } from '@/components/email
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ 
+    name?: string; 
+    email: string; 
+    emailVerified: boolean; 
+    twoFactorEnabled: boolean;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [showVerifiedMessage, setShowVerifiedMessage] = useState(false);
   const router = useRouter();

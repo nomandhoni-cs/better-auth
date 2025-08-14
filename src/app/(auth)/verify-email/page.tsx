@@ -13,7 +13,7 @@ import Link from 'next/link';
 export default function VerifyEmail() {
   const [sending, setSending] = useState(false);
   const [email, setEmail] = useState('');
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ email: string; emailVerified: boolean } | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -72,7 +72,7 @@ export default function VerifyEmail() {
       });
       
       toast.success('Verification email sent! Check your inbox and click the link to verify.');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to send verification email:', error);
       toast.error('Failed to send verification email. Please try again.');
     } finally {
@@ -128,7 +128,7 @@ export default function VerifyEmail() {
                   <ol className="text-blue-700 dark:text-blue-300 space-y-1 list-decimal list-inside">
                     <li>Check your email inbox</li>
                     <li>Click the verification link</li>
-                    <li>You'll be automatically signed in</li>
+                    <li>You&apos;ll be automatically signed in</li>
                   </ol>
                 </div>
               </div>
@@ -167,11 +167,11 @@ export default function VerifyEmail() {
             </div>
 
             {process.env.NODE_ENV === 'development' && (
-              <DevMagicLinkDisplay email={email} />
+              <DevMagicLinkDisplay />
             )}
 
             <div className="text-xs text-gray-500 text-center space-y-1">
-              <p>Didn't receive the email? Check your spam folder.</p>
+              <p>Didn&apos;t receive the email? Check your spam folder.</p>
               <p>The verification link will expire in 24 hours.</p>
               {process.env.NODE_ENV === 'development' && (
                 <p className="text-blue-400">Development: Check browser console for magic links</p>
