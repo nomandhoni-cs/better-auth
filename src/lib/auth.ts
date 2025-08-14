@@ -48,12 +48,12 @@ export const auth = betterAuth({
         }),
         passkey({
             rpID: process.env.NODE_ENV === 'production' 
-                ? process.env.PASSKEY_RP_ID || 'yourdomain.com'
+                ? 'better-auth-murex.vercel.app'
                 : 'localhost',
-            rpName: process.env.PASSKEY_RP_NAME || 'My App',
+            rpName: 'Better Auth Demo',
             origin: process.env.NODE_ENV === 'production'
-                ? process.env.BETTER_AUTH_URL || 'https://yourdomain.com'
-                : process.env.BETTER_AUTH_URL || 'http://localhost:3000',
+                ? 'https://better-auth-murex.vercel.app'
+                : 'http://localhost:3000',
             authenticatorSelection: {
                 authenticatorAttachment: undefined, // Allow both platform and cross-platform
                 residentKey: 'preferred', // Encourage credential storage
