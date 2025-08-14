@@ -107,7 +107,7 @@ export default function VerifyEmail() {
             </div>
             <CardTitle className="text-white">Check Your Email</CardTitle>
             <CardDescription className="text-gray-400">
-              We've sent a verification link to your email address
+              We have sent a verification link to your email address
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
