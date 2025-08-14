@@ -59,7 +59,7 @@ export function PasskeySignIn({ onSuccess }: PasskeySignInProps) {
     };
 
     checkConditionalUI();
-  }, []);
+  }, [onSuccess]);
 
   const handlePasskeySignIn = async (withEmail = false) => {
     if (withEmail && !email.trim()) {
@@ -74,9 +74,6 @@ export function PasskeySignIn({ onSuccess }: PasskeySignInProps) {
       });
 
       console.log('Passkey sign-in result:', result);
-      
-      // Type-safe response handling
-      const resultData = result as any;
       
       if (result?.data || result?.error === undefined) {
         toast.success('Successfully signed in with passkey!');
