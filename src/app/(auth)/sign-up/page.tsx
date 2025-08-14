@@ -24,11 +24,14 @@ export default function SignUp() {
           email,
           password,
           name,
-          callbackURL: "/dashboard",
+          callbackURL: "/verify-email",
         },
         {
           onRequest: () => setLoading(true),
-          onSuccess: () => router.push("/dashboard"),
+          onSuccess: () => {
+            // Redirect to verification page instead of dashboard
+            router.push("/verify-email?email=" + encodeURIComponent(email));
+          },
           onError: (ctx) => setError(ctx.error.message || "Sign up failed"),
         }
       );

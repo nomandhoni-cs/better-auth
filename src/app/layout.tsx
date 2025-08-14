@@ -27,12 +27,7 @@ export default function RootLayout({
       className={`${quicksand.variable} antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Flavors&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+      <head />
       <body className="font-quicksand">
         <ThemeProvider
           attribute="class"
