@@ -33,6 +33,23 @@ export function PasskeySignIn({ onSuccess }: PasskeySignInProps) {
           if (available) {
             void authClient.signIn.passkey({ 
               autoFill: true 
+            }).then((result) => {
+              console.log('Conditional UI passkey result:', result);
+              
+              // Handle successful conditional UI authentication
+              if (result?.data || result?.error === undefined) {
+                toast.success('Successfully signed in with passkey!');
+                setTimeout(() => {
+                  if (onSuccess) {
+                    onSuccess();
+                  } else {
+                    window.location.href = '/dashboard';
+                  }
+                }, 1000);
+              }
+            }).catch((error) => {
+              // Silently handle conditional UI errors as they're expected
+              console.debug('Conditional UI error (expected):', error);
             });
           }
         } catch (error) {
@@ -56,20 +73,29 @@ export function PasskeySignIn({ onSuccess }: PasskeySignInProps) {
         email: withEmail ? email.trim() : undefined
       });
 
-      if (result?.data) {
+      console.log('Passkey sign-in result:', result);
+      
+      // Type-safe response handling
+      const resultData = result as any;
+      
+      if (result?.data || result?.error === undefined) {
         toast.success('Successfully signed in with passkey!');
         
-        // Wait a bit for the session to be established
+        // Wait a bit for the session to be established, then redirect
         setTimeout(() => {
           if (onSuccess) {
             onSuccess();
           } else {
-            // Redirect to dashboard if no onSuccess callback
+            // Force a hard redirect to ensure session is properly established
             window.location.href = '/dashboard';
           }
-        }, 500);
+        }, 1000);
       } else if (result?.error) {
+        console.error('Passkey sign-in error:', result.error);
         toast.error(result.error.message || 'Failed to sign in with passkey');
+      } else {
+        console.error('No result from passkey authentication');
+        toast.error('No response from passkey authentication');
       }
     } catch (error: unknown) {
       console.error('Passkey sign-in failed:', error);
